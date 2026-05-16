@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>Anaruz Quran | أمل القلوب — Liquid Glass + WaterUP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== LIQUID GLASS + WATERUP FUSION ===== */
+        :root {
+            --deep-water: #061a2e;
+            --mid-water: #0d3557;
+            --bright-water: #1e6a92;
+            --glass-glow: #5ec8f2;
+            --gold: #d4af37;
+            --gold-light: #f0d482;
+            
+            /* Liquid Glass spécifique */
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(94, 200, 242, 0.25);
+            --glass-highlight: rgba(255, 255, 255, 0.4);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: radial-gradient(ellipse at 40% 30%, #0a2844 0%, #04121c 100%);
+            color: #eaf3fa;
+            min-height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        /* Fond aqueux subtil (WaterUP) */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 40%, rgba(30, 106, 146, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.05) 0%, transparent 60%),
+                repeating-linear-gradient(45deg, rgba(94,200,242,0.01) 0px, rgba(94,200,242,0.01) 2px, transparent 2px, transparent 8px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .quran-font { font-family: 'Amiri', serif; }
+
+        /* ===== LIQUID GLASS CORE (transparence cristalline + bords nets) ===== */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(18px) saturate(200%);
+            -webkit-backdrop-filter: blur(18px) saturate(200%);
+            border: 0.5px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 28px;
+        }
+
+        /* Effet de bordure lumineuse (Liquid Glass signature) */
+        .glass::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 40%, rgba(94,200,242,0.2) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        header, footer, aside, section { position: relative; overflow: hidden; }
+
+        /* ===== SURAH CARD — Liquid Glass + WaterUP ===== */
+        .surah-card {
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            border-right: 3px solid transparent;
+            background: rgba(13, 53, 87, 0.2);
+            backdrop-filter: blur(10px) saturate(180%);
+            -webkit-backdrop-filter: blur(10px) saturate(180%);
+            margin-bottom: 6px;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2), inset 0 1px 2px rgba(255,255,255,0.15);
+            border: 0.5px solid rgba(94, 200, 242, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Reflet liquide sur les cartes */
+        .surah-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.08), transparent);
+            border-radius: 20px 20px 0 0;
+            pointer-events: none;
+        }
+
+        .surah-card:hover {
+            border-right: 4px solid var(--gold);
+            background: rgba(30, 106, 146, 0.35);
+            box-shadow: 0 10px 24px rgba(0,0,0,0.4), inset 0 1px 4px rgba(255,255,255,0.3);
+            transform: translateX(-3px);
+        }
+
+        .surah-card:hover::before {
+            background: linear-gradient(to bottom, rgba(212,175,55,0.1), transparent);
+        }
+
+        .active-surah {
+            border-right: 4px solid var(--gold);
+            background: rgba(212, 175, 55, 0.12);
+            box-shadow: inset 0 0 20px rgba(94,200,242,0.2), 0 6px 14px rgba(0,0,0,0.4), inset 0 1px 3px rgba(255,255,255,0.2);
+        }
+
+        /* ===== HEADER & FOOTER ===== */
+        header, footer {
+            background: rgba(6, 26, 46, 0.55);
+            backdrop-filter: blur(20px) saturate(200%);
+            -webkit-backdrop-filter: blur(20px) saturate(200%);
+            border: 0.5px solid rgba(94, 200, 242, 0.3);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.4), inset 0 1px 3px rgba(255,255,255,0.15);
+        }
+
+        /* ===== READER AREA — fusion parfaite ===== */
+        #reader-area {
+            background: rgba(5, 20, 35, 0.35);
+            backdrop-filter: blur(14px) saturate(180%);
+            -webkit-backdrop-filter: blur(14px) saturate(180%);
+            border: 0.5px solid rgba(94, 200, 242, 0.25);
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.4), 0 12px 30px rgba(0,0,0,0.5), inset 0 1px 3px rgba(255,255,255,0.1);
+        }
+
+        #bismillah {
+            text-shadow: 0 0 20px rgba(94,200,242,0.7), 0 0 40px rgba(212,175,55,0.3), 0 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 3px;
+        }
+
+        #verses-content span {
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: inline-block;
+            padding: 0 6px;
+            border-radius: 18px;
+            backdrop-filter: blur(4px);
+        }
+
+        #verses-content span:hover {
+            background: rgba(94, 200, 242, 0.15);
+            text-shadow: 0 0 10px var(--glass-glow);
+            box-shadow: inset 0 1px 3px rgba(255,255,255,0.2);
+        }
+
+        /* VERSE ACTIVE — Liquid Glass highlight */
+        #verses-content .text-\[\#D4AF37\] {
+            color: var(--gold-light) !important;
+            text-shadow: 0 0 20px rgba(212,175,55,0.9), 0 0 40px rgba(94,200,242,0.6);
+            background: radial-gradient(circle at 50% 80%, rgba(212,175,55,0.2) 0%, rgba(94,200,242,0.1) 80%);
+            border-radius: 24px;
+            padding: 6px 12px;
+            box-shadow: inset 0 1px 4px rgba(255,255,255,0.3), 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* SCROLLBAR — eau + or */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(10, 35, 55, 0.4); border-radius: 10px; backdrop-filter: blur(4px); }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(145deg, var(--gold), var(--bright-water));
+            border-radius: 10px;
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.3), 0 0 6px var(--glass-glow);
+            border: 0.5px solid rgba(255,255,255,0.2);
+        }
+
+        /* BUTTONS */
+        button {
+            transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        #play-btn {
+            background: linear-gradient(145deg, #d4af37, #b8942e);
+            color: #04121c;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.5), inset 0 2px 5px rgba(255,255,255,0.6), 0 0 20px rgba(212,175,55,0.5);
+            border: 0.5px solid rgba(255,255,255,0.4);
+            backdrop-filter: blur(8px);
+        }
+
+        #play-btn:hover {
+            background: linear-gradient(145deg, #e6c15a, #d4af37);
+            box-shadow: 0 10px 22px rgba(0,0,0,0.6), inset 0 2px 6px rgba(255,255,255,0.8), 0 0 30px #d4af37;
+            transform: scale(1.05);
+        }
+
+        /* Navigation */
+        .hover\:text-\[\#D4AF37\]:hover {
+            color: var(--gold) !important;
+            text-shadow: 0 0 12px var(--glass-glow);
+            transform: scale(1.1);
+        }
+
+        /* Numéro de verset */
+        #verses-content span span {
+            border-color: var(--gold) !important;
+            background: rgba(212,175,55,0.25);
+            backdrop-filter: blur(8px);
+            color: var(--gold-light);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2), 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        /* Prayer time — Liquid Glass pill */
+        #prayer-time {
+            background: rgba(30, 106, 146, 0.25);
+            padding: 8px 20px;
+            border-radius: 40px;
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            border: 0.5px solid rgba(94,200,242,0.4);
+            box-shadow: inset 0 1px 3px rgba(255,255,255,0.2), 0 4px 10px rgba(0,0,0,0.3), 0 0 15px rgba(94,200,242,0.2);
+            color: var(--gold-light);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* Logo / header text */
+        .tracking-widest {
+            text-shadow: 0 0 15px rgba(94,200,242,0.6), 0 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #eaf3fa, #b0d4e8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Footer audio */
+        #main-player {
+            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.5));
+        }
+
+        /* Group hover */
+        .group-hover\:text-\[\#D4AF37\]:hover {
+            color: var(--gold) !important;
+        }
+
+        /* Effet d'eau supplémentaire (overlay animé subtil) */
+        .glass::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 30%, rgba(94,200,242,0.03) 0%, transparent 50%);
+            animation: waterFlow 20s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes waterFlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Ajustements RTL */
+        [dir="rtl"] .surah-card:hover {
+            transform: translateX(3px);
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden">
+
+    <header class="p-6 flex justify-between items-center glass m-4 rounded-2xl">
+        <div class="flex items-center gap-4">
+            <div class="text-3xl text-[#D4AF37] drop-shadow-[0_0_18px_#5ec8f2] relative">
+                <span class="relative z-10">💎</span>
+                <span class="absolute inset-0 text-3xl blur-sm opacity-50">💧</span>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold tracking-widest">ANARUZ QURAN</h1>
+                <p class="text-xs text-[#8ab3cf] uppercase tracking-wider">Liquid Glass + WaterUP · Youssef</p>
+            </div>
+        </div>
+        <div id="prayer-time" class="text-sm">جاري تحميل أوقات الصلاة...</div>
+    </header>
+
+    <main class="flex-1 flex overflow-hidden px-4 gap-4">
+        <aside class="w-1/4 glass rounded-2xl overflow-y-auto p-2" id="surah-list">
+            <!-- Liste chargée dynamiquement -->
+        </aside>
+
+        <section class="flex-1 glass rounded-2xl overflow-y-auto p-8 relative" id="reader-area">
+            <div id="bismillah" class="text-center text-5xl mb-8 text-[#D4AF37] quran-font"></div>
+            <div id="verses-content" class="text-right leading-[3.8rem] quran-font text-3xl text-[#d4e6f1]">
+                <div class="h-full flex items-center justify-center text-gray-400 text-lg opacity-80">
+                    <span class="glass px-6 py-3 rounded-full inline-block">✨ اختر سورة لتبدأ رحلة اليقين...</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="p-4 glass m-4 rounded-2xl flex items-center justify-between">
+        <div id="current-info" class="flex flex-col">
+            <span class="text-[#D4AF37] font-bold drop-shadow-md text-lg" id="playing-name">لم يتم اختيار سورة</span>
+            <span class="text-xs text-[#8ab3cf]" id="playing-ayah">--</span>
+        </div>
+        <audio id="main-player" controls class="hidden"></audio>
+        <div class="flex gap-6 items-center">
+            <button onclick="prevAyah()" class="hover:text-[#D4AF37] transition text-2xl text-[#b0d4e8] hover:scale-110">⏮</button>
+            <button id="play-btn" onclick="togglePlay()" class="w-14 h-14 rounded-full flex items-center justify-center font-bold text-2xl transition shadow-lg">▶</button>
+            <button onclick="nextAyah()" class="hover:text-[#D4AF37] transition text-2xl text-[#b0d4e8] hover:scale-110">⏭</button>
+        </div>
+        <div class="text-xs text-[#8ab3cf] flex items-center gap-1 glass px-4 py-2 rounded-full">
+            <span class="text-[#5ec8f2]">🎙️</span> القاريء: مشاري العفاسي
+        </div>
+    </footer>
+
+    <script>
+        // ============================================================
+        // SCRIPT 100% IDENTIQUE — LIQUID GLASS + WATERUP DESIGN SEULEMENT
+        // ============================================================
+        let currentAyahs = [];
+        let currentIndex = 0;
+        const player = document.getElementById('main-player');
+
+        // 1. Fetch Surah List
+        fetch('https://api.alquran.cloud/v1/surah')
+            .then(res => res.json())
+            .then(data => {
+                const list = document.getElementById('surah-list');
+                list.innerHTML = data.data.map(s => `
+                    <div onclick="loadSurah(${s.number}, '${s.name}')" class="surah-card p-4 mb-2 rounded-xl cursor-pointer transition flex justify-between items-center group">
+                        <span class="text-gray-400 group-hover:text-[#D4AF37] transition">${s.number}</span>
+                        <span class="font-bold text-[#cbdbe8] group-hover:text-[#D4AF37] transition">${s.name}</span>
+                    </div>
+                `).join('');
+            });
+
+        // 2. Load Surah Content
+        function loadSurah(num, name) {
+            document.getElementById('playing-name').innerText = name;
+            document.getElementById('bismillah').innerText = 'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ';
+            
+            fetch(`https://api.alquran.cloud/v1/surah/${num}/ar.alafasy`)
+                .then(res => res.json())
+                .then(data => {
+                    currentAyahs = data.data.ayahs;
+                    currentIndex = 0;
+                    renderVerses();
+                    playAyah(0);
+                });
+        }
+
+        // 3. Render Verses
+        function renderVerses() {
+            const container = document.getElementById('verses-content');
+            container.innerHTML = currentAyahs.map((a, i) => `
+                <span id="v-${i}" class="hover:text-[#D4AF37] cursor-pointer transition-all duration-500 ${i === currentIndex ? 'text-[#D4AF37] scale-110 inline-block mx-2' : ''}" onclick="playAyah(${i})">
+                    ${a.text} <span class="text-sm border border-[#D4AF37] rounded-full px-2 text-[#D4AF37] mx-1">${a.numberInSurah}</span>
+                </span>
+            `).join(' ');
+        }
+
+        // 4. Audio Control
+        function playAyah(index) {
+            currentIndex = index;
+            const ayah = currentAyahs[index];
+            player.src = ayah.audio;
+            player.play();
+            document.getElementById('play-btn').innerHTML = '⏸';
+            document.getElementById('playing-ayah').innerText = `الآية: ${ayah.numberInSurah}`;
+            renderVerses();
+            document.getElementById(`v-${index}`).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        player.onended = () => { if(currentIndex < currentAyahs.length - 1) playAyah(currentIndex + 1); };
+
+        function togglePlay() {
+            if(player.paused) { 
+                player.play(); 
+                document.getElementById('play-btn').innerHTML = '⏸'; 
+            } else { 
+                player.pause(); 
+                document.getElementById('play-btn').innerHTML = '▶'; 
+            }
+        }
+
+        function nextAyah() { if(currentIndex < currentAyahs.length - 1) playAyah(currentIndex + 1); }
+        function prevAyah() { if(currentIndex > 0) playAyah(currentIndex - 1); }
+
+        // 5. Prayer Times (Simple Logic for Morocco)
+        const times = ["الفجر: 05:40", "الظهر: 12:45", "العصر: 15:55", "المغرب: 18:20", "العشاء: 19:45"];
+        document.getElementById('prayer-time').innerText = times[2];
+    </script>
+</body>
+</html>
